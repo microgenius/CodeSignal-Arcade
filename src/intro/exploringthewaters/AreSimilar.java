@@ -13,15 +13,13 @@ public class AreSimilar {
         .boxed()
         .collect(Collectors.toList());
 
-    if (differentItemIndexList.size() <= 1)
-      return true;
-    else if (differentItemIndexList.size() == 2){
+    if (differentItemIndexList.size() == 2){
       int firstIndex = differentItemIndexList.get(0);
       int secondIndex = differentItemIndexList.get(1);
 
       return a[firstIndex] == b[secondIndex] && a[secondIndex] == b[firstIndex];
     }
 
-    return false;
+    return differentItemIndexList.size() == 0;
   }
 }
