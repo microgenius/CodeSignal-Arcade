@@ -1,19 +1,15 @@
 package intro.exploringthewaters;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class PalindromeRearranging {
   boolean palindromeRearranging(String inputString) {
-    Map<Character, Integer> uniqueCharSet = new HashMap<>();
-    for (int i = 0; i < inputString.length(); i++) {
-      Integer charCount = uniqueCharSet.get(inputString.charAt(i));
-      if (charCount == null)
-        charCount = 0;
-
-      charCount++;
-      uniqueCharSet.put(inputString.charAt(i), charCount);
-    }
+    final Map<Character, Long> uniqueCharSet = inputString
+        .chars()
+        .mapToObj(c -> (char) c)
+        .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
     long oddCharCount = uniqueCharSet
         .values()
@@ -24,7 +20,7 @@ public class PalindromeRearranging {
     return oddCharCount <= 1;
   }
 
-  public boolean isEven(int number) {
+  boolean isEven(long number) {
     return number % 2 == 0;
   }
 }
